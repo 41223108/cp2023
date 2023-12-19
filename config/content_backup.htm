@@ -1229,13 +1229,75 @@ void draw_red_sun(gdImagePtr img, int x, int y, int size, int color) {
 <p><a href="https://github.com/obsproject/obs-studio/releases">OBS</a><span> </span>為電腦廣播製作系統, 可以結合各種語音、圖像與影片製作出多元的電腦操作說明影片.</p>
 <p>Wink 與 ShareX 都需要<span> </span><a href="https://ffmpeg.org/download.html#build-windows">ffmpeq.exe</a>.</p>
 <h1>w12</h1>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+#include &lt;gd.h&gt;
+#include &lt;math.h&gt;
+ 
+int main() {
+    int width = 800;
+    int height = 600;
+ 
+    gdImagePtr img = gdImageCreateTrueColor(width, height);
+    gdImageAlphaBlending(img, 0);
+ 
+    FILE *outputFile = fopen("hellogd.png", "wb");
+    if (outputFile == NULL) {
+ 
+fprintf(stderr, "Error opening the output file.\n");
+ 
+return 1;
+    }
+    
+    int red = gdImageColorAllocate(img, 255, 0, 0);
+    int blue = gdImageColorAllocate(img, 0, 0, 255);
+    int black = gdImageColorAllocate(img, 0, 0, 0);
+    int white = gdImageColorAllocate(img, 255, 255, 255);
+    // 長方形塗色
+    gdImageFilledRectangle(img, 0, 0, width, height, white);
+    gdImageFilledRectangle(img, 0, 0, (int)width/4, (int)height/4, blue);
+    // 橢圓形塗色
+    gdImageFilledEllipse(img, (int)width*3/4, (int)height/4, (int)width/4, (int)width/4, red);
+    // 橢圓形畫線
+    gdImageEllipse(img, (int)width*3/4, (int)height*3/4, (int)width/4, (int)width/4, red);
+    // 畫直線
+    gdImageLine(img, (int)width/2, (int)height/2, (int)width/2, (int)height/2 + 100, blue);
+    
+    // 多邊形畫線
+    gdPoint points[4];
+    points[0].x = (int)width/4;
+    points[0].y = (int)height*3/4;
+    points[1].x = points[0].x + 100;
+    points[1].y = points[0].y;
+    points[2].x = points[1].x;
+    points[2].y = points[1].y + 100;
+    points[3].x = points[2].x - 100;
+    points[3].y = points[2].y;
+    gdImagePolygon(img, points, 4, black);
+    
+    // 多邊形塗色
+    gdPoint points2[4];
+    points2[0].x = (int)width/3;
+    points2[0].y = (int)height/2;
+    points2[1].x = points2[0].x + 100;
+    points2[1].y = points2[0].y;
+    points2[2].x = points2[1].x;
+    points2[2].y = points2[1].y + 100;
+    points2[3].x = points2[2].x - 150;
+    points2[3].y = points2[2].y;
+    gdImageFilledPolygon(img, points2, 4, red);
+ 
+    gdImagePngEx(img, outputFile, 9);
+    fclose(outputFile);
+    gdImageDestroy(img);
+    return 0;
+}</pre>
 <p><a href="https://nfuedu-my.sharepoint.com/:v:/g/personal/yen_nfu_edu_tw/EZNZ2_9DTYxLgP8k-6mK7ecBWpTNivviMP5bzt_IXGqKeA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=PXC5Ry">w12_1b_1.mp4</a><span> </span>(說明如何在 Replit, s.cycu.org 與 Windows 中執行 C 程式)</p>
 <p><a href="https://nfuedu-my.sharepoint.com/:v:/g/personal/yen_nfu_edu_tw/Ecz860nqrz9NrCNGlDdWlzwB8gENnoBaQK7XZUnmySzYfg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=KeyBMP">w12_1b_2.mp4</a><span> </span>(說明如何在 Replit, s.cycu.org 與 Windows 中執行 C 程式的 gd 繪圖)</p>
 <p><a href="https://nfuedu-my.sharepoint.com/:v:/g/personal/yen_nfu_edu_tw/EZMnF8bRmx1Eib2KpLGr5W4BRigUieEJoTtWO18TrOWLEQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=a5sN8P">w12_1b_3.mp4</a><span> </span>(說明如何在 Windows 共用 s.cycu.org 上的 id_rsa 私鑰, 轉為 .ppk 之後, 可以再結合 .gitconfig 中的 http.proxy 設定, 以 SSH 加上 https 取下個人或分組倉儲後, 在 Windows 啟動編輯改版後推至 Github)</p>
+<p></p>
 <div>
 <div class="syntaxhighlighter cpp" id="highlighter_46366"></div>
-</div>
-<h1>W13</h1>
+</div><h1>W13</h1>
 <p><span>  在計算機程式課程中，我獲得了豐富的學習經驗。</span><wbr/><span>這門課程深入介紹了程式設計的基本概念和實際應用，</span><wbr/><span>讓我計算機程式有了更深刻的理解。</span></p>
 <p><span>  首先，課程強調了程式語言的重要性，我學到了多種語言，</span><wbr/><span>包括Python與C++。這不僅擴大了我的對程式設計視野，</span><wbr/><span>還讓我能夠更靈活地應對不同的問題和場景。在每個語言中，</span><wbr/><span>我學會了許多撰寫程式</span><span>的基本技能。 </span></p>
 <p><span>  其次，</span><span> 在小組合作中，我與同學們分享了想法，</span><wbr/><span>討論了不同的解決方案。這種合作氛圍拓寬了我的思維，</span><wbr/><span>讓我從不同的角度看待問題，也提高了我的團隊合作和溝通能力。</span></p>
