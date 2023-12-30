@@ -2,7 +2,7 @@
         <head>
         <title>cmsite</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -142,12 +142,159 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">GD繪圖程式1 << <a href='GD繪圖程式1.html'>Previous</a> <a href='w15.html'>Next</a> >> w15<br /><h1>W13</h1>
-<p><span>  在計算機程式課程中，我獲得了豐富的學習經驗。</span><wbr/><span>這門課程深入介紹了程式設計的基本概念和實際應用，</span><wbr/><span>讓我計算機程式有了更深刻的理解。</span></p>
-<p><span>  首先，課程強調了程式語言的重要性，我學到了多種語言，</span><wbr/><span>包括Python與C++。這不僅擴大了我的對程式設計視野，</span><wbr/><span>還讓我能夠更靈活地應對不同的問題和場景。在每個語言中，</span><wbr/><span>我學會了許多撰寫程式</span><span>的基本技能。 </span></p>
-<p><span>  其次，</span><span> 在小組合作中，我與同學們分享了想法，</span><wbr/><span>討論了不同的解決方案。這種合作氛圍拓寬了我的思維，</span><wbr/><span>讓我從不同的角度看待問題，也提高了我的團隊合作和溝通能力。</span></p>
-<p><span>  綜上所述，計算機程式課程不僅豐富了我的專業知識，</span><wbr/><span>還培養了我的邏輯思維和解難能力。這門課程不僅是我的學術收獲，</span><wbr/><span>更是我在程式設計領域邁出重要的一步。</span><wbr/><span>我期待將這些學到的技能應用到未來的項目中，</span><wbr/><span>並持續追求在程式設計領域的進一步成長。</span></p>
-<br />GD繪圖程式1 << <a href='GD繪圖程式1.html'>Previous</a> <a href='w15.html'>Next</a> >> w15</div>
+    <div id="tipue_search_content">helloworld << <a href='helloworld.html'>Previous</a> <a href='W13.html'>Next</a> >> W13<br /><h1>GD繪圖程式1</h1>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+#include &lt;gd.h&gt;
+#include &lt;math.h&gt;
+ 
+int main() {
+    int width = 800;
+    int height = 600;
+ 
+    gdImagePtr img = gdImageCreateTrueColor(width, height);
+    gdImageAlphaBlending(img, 0);
+ 
+    FILE *outputFile = fopen("hellogd.png", "wb");
+    if (outputFile == NULL) {
+ 
+fprintf(stderr, "Error opening the output file.\n");
+ 
+return 1;
+    }
+    
+    int red = gdImageColorAllocate(img, 255, 0, 0);
+    int blue = gdImageColorAllocate(img, 0, 0, 255);
+    int black = gdImageColorAllocate(img, 0, 0, 0);
+    int white = gdImageColorAllocate(img, 255, 255, 255);
+    // 長方形塗色
+    gdImageFilledRectangle(img, 0, 0, width, height, white);
+    gdImageFilledRectangle(img, 0, 0, (int)width/4, (int)height/4, blue);
+    // 橢圓形塗色
+    gdImageFilledEllipse(img, (int)width*3/4, (int)height/4, (int)width/4, (int)width/4, red);
+    // 橢圓形畫線
+    gdImageEllipse(img, (int)width*3/4, (int)height*3/4, (int)width/4, (int)width/4, red);
+    // 畫直線
+    gdImageLine(img, (int)width/2, (int)height/2, (int)width/2, (int)height/2 + 100, blue);
+    
+    // 多邊形畫線
+    gdPoint points[4];
+    points[0].x = (int)width/4;
+    points[0].y = (int)height*3/4;
+    points[1].x = points[0].x + 100;
+    points[1].y = points[0].y;
+    points[2].x = points[1].x;
+    points[2].y = points[1].y + 100;
+    points[3].x = points[2].x - 100;
+    points[3].y = points[2].y;
+    gdImagePolygon(img, points, 4, black);
+    
+    // 多邊形塗色
+    gdPoint points2[4];
+    points2[0].x = (int)width/3;
+    points2[0].y = (int)height/2;
+    points2[1].x = points2[0].x + 100;
+    points2[1].y = points2[0].y;
+    points2[2].x = points2[1].x;
+    points2[2].y = points2[1].y + 100;
+    points2[3].x = points2[2].x - 150;
+    points2[3].y = points2[2].y;
+    gdImageFilledPolygon(img, points2, 4, red);
+ 
+    gdImagePngEx(img, outputFile, 9);
+    fclose(outputFile);
+    gdImageDestroy(img);
+    return 0;
+}</pre>
+<p><img alt="" height="300" src="./../images/hellogd.png" width="400"/></p>
+<p><a href="https://nfuedu-my.sharepoint.com/:v:/g/personal/yen_nfu_edu_tw/EZNZ2_9DTYxLgP8k-6mK7ecBWpTNivviMP5bzt_IXGqKeA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=PXC5Ry"></a></p>
+<div>
+<div class="syntaxhighlighter cpp" id="highlighter_46366">
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+#include &lt;gd.h&gt;
+#include &lt;math.h&gt;
+ 
+// Declare the rotation function
+void rotateFilledPolygon(int x_orig, int y_orig, double rotation_ang, gdPoint *points, int num_points) {
+    int i;
+    double angle_rad = rotation_ang * M_PI / 180.0;
+ 
+    for (i = 0; i &lt; num_points; i++) {
+        int x = points[i].x - x_orig;
+        int y = points[i].y - y_orig;
+ 
+        points[i].x = x_orig + (int)(x * cos(angle_rad) - y * sin(angle_rad));
+        points[i].y = y_orig + (int)(x * sin(angle_rad) + y * cos(angle_rad));
+    }
+}
+ 
+int main() {
+    int width = 800;
+    int height = 600;
+ 
+    gdImagePtr img = gdImageCreateTrueColor(width, height);
+    gdImageAlphaBlending(img, 0);
+ 
+    FILE *outputFile = fopen("./../images/hellogd2.png", "wb");
+    if (outputFile == NULL) {
+        fprintf(stderr, "Error opening the output file.\n");
+        return 1;
+    }
+ 
+    int red = gdImageColorAllocate(img, 255, 0, 0);
+    int blue = gdImageColorAllocate(img, 0, 0, 255);
+    int black = gdImageColorAllocate(img, 0, 0, 0);
+    int white = gdImageColorAllocate(img, 255, 255, 255);
+ 
+    gdImageFilledRectangle(img, 0, 0, width, height, white);
+    gdImageFilledRectangle(img, 0, 0, (int)width / 4, (int)height / 4, blue);
+ 
+    gdImageFilledEllipse(img, (int)width * 3 / 4, (int)height / 4, (int)width / 4, (int)width / 4, red);
+    gdImageEllipse(img, (int)width * 3 / 4, (int)height * 3 / 4, (int)width / 4, (int)width / 4, red);
+    gdImageLine(img, (int)width / 2, (int)height / 2, (int)width / 2, (int)height / 2 + 100, blue);
+ 
+    gdPoint points[4];
+    points[0].x = (int)width / 4;
+    points[0].y = (int)height * 3 / 4;
+    points[1].x = points[0].x + 100;
+    points[1].y = points[0].y;
+    points[2].x = points[1].x;
+    points[2].y = points[1].y + 100;
+    points[3].x = points[2].x - 100;
+    points[3].y = points[2].y;
+ 
+    // Call the rotation function multiple times
+    for (int i = 0; i &lt; 4; i++) {
+        rotateFilledPolygon((int)width / 4 + 50, (int)height * 3 / 4 + 50, 30.0, points, 4);
+        gdImagePolygon(img, points, 4, black);
+    }
+ 
+    gdPoint points2[4];
+    points2[0].x = (int)width / 3;
+    points2[0].y = (int)height / 2;
+    points2[1].x = points2[0].x + 100;
+    points2[1].y = points2[0].y;
+    points2[2].x = points2[1].x;
+    points2[2].y = points2[1].y + 100;
+    points2[3].x = points2[2].x - 150;
+    points2[3].y = points2[2].y;
+ 
+    // Call the rotation function multiple times
+    for (int i = 0; i &lt; 12; i++) {
+        //rotateFilledPolygon((int)width / 3 + 50, (int)height / 2 + 50, 30.0, points2, 4);
+        rotateFilledPolygon(500, 200, 30.0, points2, 4);
+        gdImageFilledPolygon(img, points2, 4, red);
+    }
+ 
+    gdImagePngEx(img, outputFile, 9);
+    fclose(outputFile);
+    gdImageDestroy(img);
+ 
+    return 0;
+}</pre>
+<p><img alt="" height="300" src="./../images/hellogd2.png" width="400"/></p>
+</div>
+</div>
+<br />helloworld << <a href='helloworld.html'>Previous</a> <a href='W13.html'>Next</a> >> W13</div>
         
     <!-- footer -->
       <div class="container">
