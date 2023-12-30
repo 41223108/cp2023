@@ -142,85 +142,81 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w1~4 << <a href='w1~4.html'>Previous</a> <a href='w6.html'>Next</a> >> w6<br /><h1>w5</h1>
-<p>要先在replit.nix新增程式庫</p>
-<div>
-<div class="syntaxhighlighter cpp" id="highlighter_336075">
-<table border="0" cellpadding="0" cellspacing="0">
-<tbody>
-<tr>
-<td class="gutter">
-<div class="line number1 index0 alt2">1</div>
-<div class="line number2 index1 alt1">2</div>
-<div class="line number3 index2 alt2">3</div>
-<div class="line number4 index3 alt1">4</div>
-<div class="line number5 index4 alt2">5</div>
-<div class="line number6 index5 alt1">6</div>
-<div class="line number7 index6 alt2">7</div>
-</td>
-<td class="code">
-<div class="container">
-<div class="line number1 index0 alt2"><code class="cpp plain">{ pkgs }: {</code></div>
-<div class="line number2 index1 alt1"><code class="cpp spaces">    </code><code class="cpp plain">deps = [</code></div>
-<div class="line number3 index2 alt2"><code class="cpp spaces">      </code><code class="cpp plain">pkgs.gnuplot</code></div>
-<div class="line number4 index3 alt1"><code class="cpp spaces">      </code><code class="cpp plain">pkgs.ncurses.dev</code></div>
-<div class="line number5 index4 alt2"><code class="cpp spaces">      </code><code class="cpp plain">pkgs.gd</code></div>
-<div class="line number6 index5 alt1"><code class="cpp spaces">    </code><code class="cpp plain">];</code></div>
-<div class="line number7 index6 alt2"><code class="cpp plain">}</code></div>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>曲線圖程式與圖片</p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">// 包含標準輸出入程式庫的標頭文件
-// https://blog.csdn.net/weixin_38468077/article/details/101069365
-// http://www.gnuplot.info/demo/
-// https://github.com/sysprog21/rv32emu
-// https://github.com/sysprog21/semu 
-// https://docs.google.com/presentation/d/14N0cWG2SnBSqhc2cLF0_2VerB9FF8JN3
-// https://cs61c.org/fa23/
-// https://greenteapress.com/wp/think-python-2e/
-// https://github.com/ecalvadi/c99-examples
-// https://github.com/gouravthakur39/beginners-C-program-examples
-// https://github.com/ergenekonyigit/Numerical-Analysis-Examples
-// https://www.che.ncku.edu.tw/facultyweb/changct/html/teaching/CPPandMATLAB/Past/pdf%20Files/Chap02-Ling.pdf
-// https://gteceducation.com.sg/Brochures/PROGRAMMING/C%20PROGRAMMING%20FULL.pdf
-// https://jsommers.github.io/cbook/cbook.pdf
-// https://jsommers.github.io/cbook/index.html
-// http://student.itee.uq.edu.au/courses/csse2310/CProgrammingNotes.pdf
-// http://cslibrary.stanford.edu/101/EssentialC.pdf
-// https://publications.gbdirect.co.uk/c_book/
-// https://www.fossil-scm.org/fossil-book/doc/2ndEdition/fossilbook.pdf
-// ***** execute on replit 
-// cd downloads
-// cc gnuplot_ex1.c -o gnuplot_ex1
-// ./gnuplot_ex1
-#include &lt;stdio.h&gt;
-   
-// 主函式
-int main() {
-    // Start a Gnuplot process using popen
-    FILE *gnuplotPipe = popen("gnuplot -persistent", "w");
-    if (!gnuplotPipe) {
-        fprintf(stderr, "Failed to start Gnuplot.\n");
-        return 1;
+    <div id="tipue_search_content">國旗練習 << <a href='國旗練習.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython<br /><h1>Thai</h1>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+#include &lt;gd.h&gt;
+#include &lt;math.h&gt;
+
+#define WIDTH 600
+#define HEIGHT 400
+
+void drawThaiFlag(gdImagePtr im) {
+    int white = gdImageColorAllocate(im, 255, 255, 255);
+    int indigo = gdImageColorAllocate(im, 46, 49, 146);  // 較深的靛藍色
+    int red = gdImageColorAllocate(im, 255, 0, 0);
+
+    // Draw white background
+    gdImageFilledRectangle(im, 0, 0, WIDTH, HEIGHT, white);
+
+    // Calculate stripe heights based on the specified ratio
+    int totalStripes = 5;
+    int stripeHeights[5] = {1, 1, 2, 1, 1};
+    int totalHeight = 0;
+    for (int i = 0; i &lt; totalStripes; ++i) {
+        totalHeight += stripeHeights[i];
     }
-   
-    // Use Gnuplot plotting commands, specify font and output as PNG
-    fprintf(gnuplotPipe, "set terminal png font 'default,10' size 800,400\n");
-    fprintf(gnuplotPipe, "set output './../images/gnuplot_ex1.png'\n");
-    fprintf(gnuplotPipe, "plot sin(x)");
-    // Close popen
-    pclose(gnuplotPipe);
-   
+
+    // Draw stripes
+    int startY = 0;
+    for (int i = 0; i &lt; totalStripes; ++i) {
+        int stripeHeight = stripeHeights[i] * HEIGHT / totalHeight;
+        switch (i % 5) {
+            case 0: // Red stripe
+                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, red);
+                break;
+            case 1: // White stripe
+                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, white);
+                break;
+            case 2: // Indigo stripe (靛藍色)
+                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, indigo);
+                break;
+            case 3: // White stripe
+                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, white);
+                break;
+            case 4: // Red stripe
+                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, red);
+                break;
+        }
+        startY += stripeHeight;
+    }
+}
+
+int main() {
+    gdImagePtr im;
+    FILE *outputFile;
+
+    // Create a new image with specified width and height
+    im = gdImageCreate(WIDTH, HEIGHT);
+
+    // Draw the Thai flag on the image
+    drawThaiFlag(im);
+
+    // Open a file for writing
+    outputFile = fopen("thai_flag.png", "wb");
+
+    // Write the image to the file in PNG format
+    gdImagePng(im, outputFile);
+
+    // Close the file
+    fclose(outputFile);
+
+    // Free the memory used for the image
+    gdImageDestroy(im);
+
     return 0;
 }
 </pre>
-<p><img alt="" height="200" src="./../images/gnuplot_ex1.png" width="400"/></p>
-<br />w1~4 << <a href='w1~4.html'>Previous</a> <a href='w6.html'>Next</a> >> w6</div>
+<p><img alt="" height="280" src="./../images/thai_flag.png" width="420"/></p><br />國旗練習 << <a href='國旗練習.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython</div>
         
     <!-- footer -->
       <div class="container">
