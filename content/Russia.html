@@ -142,25 +142,59 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">3. << <a href='3..html'>Previous</a> <a href='5..html'>Next</a> >> 5.<br /><h1>4.</h1>
+    <div id="tipue_search_content">Italian << <a href='Italian.html'>Previous</a> <a href='課程評分.html'>Next</a> >> 課程評分<br /><h1>Russia</h1>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+#include &lt;gd.h&gt;
+#include &lt;math.h&gt;
 
-int main() 
-{
-    // Declare and initialize character variables
-    char char1 = 'Y';
-    char char2 = 'Y';
-    char char3 = 'T';
+#define WIDTH 600
+#define HEIGHT 400
+#define WHITE 0xFFFFFF  // White color
+#define BLUE 0x0033A0   // Blue color
+#define RED 0xD52B1E    // Red color
 
-    // Print the original and reversed characters
-    printf("The reverse of %c%c%c is %c%c%c\n",
-        char1, char2, char3,
-        char3, char2, char1);
+void drawRussiaFlag() {
+    gdImagePtr im;
+    FILE *output;
 
-    return(0);
+    im = gdImageCreateTrueColor(WIDTH, HEIGHT);
+    output = fopen("russia_flag.png", "wb");
+
+    // Draw white rectangle (top part)
+    int whiteRectWidth = WIDTH;
+    int whiteRectHeight = HEIGHT / 3;
+    int whiteRectX = 0;
+    int whiteRectY = 0;
+
+    gdImageFilledRectangle(im, whiteRectX, whiteRectY, whiteRectX + whiteRectWidth, whiteRectY + whiteRectHeight, WHITE);
+
+    // Draw blue rectangle (middle part)
+    int blueRectWidth = WIDTH;
+    int blueRectHeight = HEIGHT / 3;
+    int blueRectX = 0;
+    int blueRectY = HEIGHT / 3;
+
+    gdImageFilledRectangle(im, blueRectX, blueRectY, blueRectX + blueRectWidth, blueRectY + blueRectHeight, BLUE);
+
+    // Draw red rectangle (bottom part)
+    int redRectWidth = WIDTH;
+    int redRectHeight = HEIGHT / 3;
+    int redRectX = 0;
+    int redRectY = 2 * HEIGHT / 3;
+
+    gdImageFilledRectangle(im, redRectX, redRectY, redRectX + redRectWidth, redRectY + redRectHeight, RED);
+
+    gdImagePng(im, output);
+    fclose(output);
+    gdImageDestroy(im);
+}
+
+int main() {
+    drawRussiaFlag();
+    return 0;
 }</pre>
-<p><img alt="" height="233" src="./../images/4.c.png" width="420"/></p>
-<br />3. << <a href='3..html'>Previous</a> <a href='5..html'>Next</a> >> 5.</div>
+<p><img alt="" height="280" src="./../images/russia_flag.png" width="420"/></p>
+<br />Italian << <a href='Italian.html'>Previous</a> <a href='課程評分.html'>Next</a> >> 課程評分</div>
         
     <!-- footer -->
       <div class="container">
