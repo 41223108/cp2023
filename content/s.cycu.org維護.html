@@ -142,82 +142,14 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">國旗練習 << <a href='國旗練習.html'>Previous</a> <a href='Laos.html'>Next</a> >> Laos<br /><h1>Thai</h1>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
-#include &lt;math.h&gt;
-
-#define WIDTH 600
-#define HEIGHT 400
-
-void drawThaiFlag(gdImagePtr im) {
-    int white = gdImageColorAllocate(im, 255, 255, 255);
-    int indigo = gdImageColorAllocate(im, 46, 49, 146);  // 較深的靛藍色
-    int red = gdImageColorAllocate(im, 255, 0, 0);
-
-    // Draw white background
-    gdImageFilledRectangle(im, 0, 0, WIDTH, HEIGHT, white);
-
-    // Calculate stripe heights based on the specified ratio
-    int totalStripes = 5;
-    int stripeHeights[5] = {1, 1, 2, 1, 1};
-    int totalHeight = 0;
-    for (int i = 0; i &lt; totalStripes; ++i) {
-        totalHeight += stripeHeights[i];
-    }
-
-    // Draw stripes
-    int startY = 0;
-    for (int i = 0; i &lt; totalStripes; ++i) {
-        int stripeHeight = stripeHeights[i] * HEIGHT / totalHeight;
-        switch (i % 5) {
-            case 0: // Red stripe
-                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, red);
-                break;
-            case 1: // White stripe
-                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, white);
-                break;
-            case 2: // Indigo stripe (靛藍色)
-                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, indigo);
-                break;
-            case 3: // White stripe
-                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, white);
-                break;
-            case 4: // Red stripe
-                gdImageFilledRectangle(im, 0, startY, WIDTH, startY + stripeHeight, red);
-                break;
-        }
-        startY += stripeHeight;
-    }
-}
-
-int main() {
-    gdImagePtr im;
-    FILE *outputFile;
-
-    // Create a new image with specified width and height
-    im = gdImageCreate(WIDTH, HEIGHT);
-
-    // Draw the Thai flag on the image
-    drawThaiFlag(im);
-
-    // Open a file for writing
-    outputFile = fopen("thai_flag.png", "wb");
-
-    // Write the image to the file in PNG format
-    gdImagePng(im, outputFile);
-
-    // Close the file
-    fclose(outputFile);
-
-    // Free the memory used for the image
-    gdImageDestroy(im);
-
-    return 0;
-}
-</pre>
-<p><img alt="" height="280" src="./../images/thai_flag.png" width="420"/></p>
-<br />國旗練習 << <a href='國旗練習.html'>Previous</a> <a href='Laos.html'>Next</a> >> Laos</div>
+    <div id="tipue_search_content">倉儲維護 << <a href='倉儲維護.html'>Previous</a> <a href='weekly progress.html'>Next</a> >> weekly progress<br /><h1>s.cycu.org維護</h1>
+<p><span>1.</span>登入<span><span> </span>s.cycu.org<span> </span></span>之後<span>,<span> </span></span>以<span> </span><span>ssh-keygen<span> </span></span>指令<span>,<span> </span></span>連續按下三個<span><span> </span>Enter,<span> </span></span>就可以在<span><span> </span>.ssh<span> </span></span>目錄建立<span><span> </span>id_rsa<span> </span></span>與<span><span> </span>id_rsa.pub</span></p>
+<p><span>2.</span>在<span><span> </span>Windows 11<span> </span></span>以<span><span> </span>sftp<span> </span></span>帳號<span>@s.cycu.org<span> </span></span>登入遠端檔案傳輸模式後<span>, cd .ssh<span> </span></span>之後<span>,<span> </span></span>在<span><span> </span>.ssh<span> </span></span>目錄以<span> </span><span>get id_rsa*<span> </span></span>取下私鑰與公鑰</p>
+<p><span>3.</span>利用<span><span> </span>SciTE<span> </span></span>開啟<span><span> </span>id_rsa.pub,<span> </span></span>並將公鑰內容送到<span><span> </span>Github<span> </span></span>帳號<span><span> </span>Settings<span> </span></span>中的<span><span> </span>SSH and GPG keys</span></p>
+<p><span>4.</span>下載<span> </span><span><a href="https://mde.tw/cpnote/downloads/config">config</a><span> </span>SSH<span> </span></span>設定檔案<span>,<span> </span></span>利用<span><span> </span>sftp<span> </span></span>模式<span>,<span> </span></span>以<span><span> </span>put config<span> </span></span>送到<span><span> </span>s.cycu.org<span> </span></span>帳號下的<span><span> </span>.ssh<span> </span></span>目錄<span>,<span> </span></span>此時在<span><span> </span>s.cycu.org<span> </span></span>已經可以利用<span><span> </span>github.com<span> </span></span>昨為代號<span>,<span> </span></span>透過代理主機與私鑰<span>,<span> </span></span>以<span>git clone --recurse-submodules<a href="mailto:git@github.com">git@github.com</a>:</span>帳號<span>/</span>倉儲名稱<span>.git<span> </span></span>取下倉儲內容<span>,<span> </span></span>並在<span><span> </span>python3 server.py<span> </span></span>之後啟動編輯網站<span>,<span> </span></span>改版後<span><span> </span>Convert<span> </span></span>轉靜態<span>,<span> </span></span>並透過<span> </span><span>chmod u+x acp<span> </span></span>讓<span><span> </span>acp<span> </span></span>可以執行<span>.</span></p>
+<p><span>5.</span>改版並轉靜態之後<span>,<span> </span></span>就可以利用<span><span> </span>acp<span> </span></span>按鈕執行新增提交與推送</p>
+<p><span>6.</span>若已知同一倉儲已經在其他地方將改版資料推向<span><span> </span>Github,<span> </span></span>在<span><span> </span>s.cycu.org<span> </span></span>執行改版程序之前<span>,<span> </span></span>可以利用<span> </span><span>git pull<span> </span></span>減少之後推送時必須解決的衝突內容，盡量不要一次上傳很多，容易發生故障</p>
+<br />倉儲維護 << <a href='倉儲維護.html'>Previous</a> <a href='weekly progress.html'>Next</a> >> weekly progress</div>
         
     <!-- footer -->
       <div class="container">
