@@ -142,48 +142,27 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">vietnam << <a href='vietnam.html'>Previous</a> <a href='課程評分.html'>Next</a> >> 課程評分<br /><h1>Italian</h1>
+    <div id="tipue_search_content">1. << <a href='1..html'>Previous</a> <a href='NOTE.html'>Next</a> >> NOTE<br /><h1>2.</h1>
+<p></p>
+<p></p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
 
-int main() {
-    int width = 300;  // 宽度
-    int height = 200; // 高度
+int main(int argc, char** argv) {
+    // Check for C standard version
+    #if __STDC_VERSION__ &gt;=  201710L
+        printf("We are using C18!\n");
+    #elif __STDC_VERSION__ &gt;= 201112L
+        printf("We are using C11!\n");
+    #elif __STDC_VERSION__ &gt;= 199901L
+        printf("We are using C99!\n");
+    #else
+        printf("We are using C89/C90!\n");
+    #endif
 
-    gdImagePtr image = gdImageCreateTrueColor(width, height);
-
-    if (image == NULL) {
-        printf("Failed to create image.\n");
-        return 1;
-    }
-
-    // 确定颜色索引
-    int green = gdImageColorAllocate(image, 0, 128, 0);
-    int white = gdImageColorAllocate(image, 255, 255, 255);
-    int red = gdImageColorAllocate(image, 255, 0, 0);
-
-    // 填充颜色
-    gdImageFilledRectangle(image, 0, 0, width / 3, height, green);
-    gdImageFilledRectangle(image, width / 3, 0, (width / 3) * 2, height, white);
-    gdImageFilledRectangle(image, (width / 3) * 2, 0, width, height, red);
-
-    FILE *outputFile;
-    outputFile = fopen("./../images/italian_flag.png", "wb");
-
-    if (outputFile == NULL) {
-        printf("Failed to open file for writing.\n");
-        return 1;
-    }
-
-    gdImagePng(image, outputFile);
-    fclose(outputFile);
-
-    gdImageDestroy(image);
-
+    // Indicate successful execution
     return 0;
 }</pre>
-<p><img alt="" height="280" src="./../images/italian_flag.png" width="420"/></p>
-<br />vietnam << <a href='vietnam.html'>Previous</a> <a href='課程評分.html'>Next</a> >> 課程評分</div>
+<p><img alt="" height="205" src="./../images/2.c.png" width="420"/></p><br />1. << <a href='1..html'>Previous</a> <a href='NOTE.html'>Next</a> >> NOTE</div>
         
     <!-- footer -->
       <div class="container">
